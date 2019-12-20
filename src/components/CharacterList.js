@@ -6,7 +6,24 @@ import styled from 'styled-components'
 export default function CharacterList() {
   const CharList = styled.div`
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   `;
+  const CharCard = styled.div`
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    margin: 5%;
+    border: 2px solid black;
+    padding: 1%;
+  `;
+
+  const SearchPlace = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 3%;
+  `;
+
 
   const [api] = useState("https://rickandmortyapi.com/api/character/?name=");
   const [search, setSearch] = useState('');
@@ -29,7 +46,7 @@ export default function CharacterList() {
 
   let chars = guys.map(guy => {
     return (
-      <div>
+      <CharCard>
         <div>
           <h1>{guy.name}</h1>
           <p>Species: {guy.species}</p>
@@ -37,17 +54,19 @@ export default function CharacterList() {
           <p>Status: {guy.status}</p>
         </div>
         <img alt={guy.name} src={guy.image}/>
-      </div>
+      </CharCard>
     );
   });
 
   return (
     <div>
-      <SearchForm guys={guys} setGuys={setGuys} folks={folks} search={search} setSearch={setSearch}/>
+      <SearchPlace>
+        <SearchForm guys={guys} setGuys={setGuys} folks={folks} search={search} setSearch={setSearch}/>
+      </SearchPlace>
 
       <section className="character-list">
         <CharList>
-          <h2>{chars}</h2>
+          {chars}
         </CharList>
       </section>
     </div>
