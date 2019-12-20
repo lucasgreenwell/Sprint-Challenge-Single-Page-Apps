@@ -6,17 +6,17 @@ import styled from 'styled-components'
 export default function CharacterList() {
   const CharList = styled.div`
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
   `;
 
+  const [api] = useState("https://rickandmortyapi.com/api/character/?name=");
+  const [search, setSearch] = useState('');
 
   const [guys, setGuys] = useState([]);
   const [folks, setFolks] = useState([]);
   
   useEffect(() => {
     axios
-      .get("https://rickandmortyapi.com/api/character/")
+      .get(`${api}${search}`)
       .then(res => {
         // console.log(res);
         setGuys(res.data.results);
@@ -25,7 +25,7 @@ export default function CharacterList() {
       .catch(err => {
         console.log(err);
       });
-  }, []);
+  }, [search]);
 
   let chars = guys.map(guy => {
     return (
@@ -42,11 +42,14 @@ export default function CharacterList() {
   });
 
   return (
-    <CharList>
-      <SearchForm guys={guys} setGuys={setGuys} folks={folks}/>
+    <div>
+      <SearchForm guys={guys} setGuys={setGuys} folks={folks} search={search} setSearch={setSearch}/>
+
       <section className="character-list">
-        <h2>{chars}</h2>
+        <CharList>
+          <h2>{chars}</h2>
+        </CharList>
       </section>
-    </CharList>
+    </div>
   );
 }
