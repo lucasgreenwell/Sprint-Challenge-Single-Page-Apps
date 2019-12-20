@@ -27,7 +27,7 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ]  Explain benefit(s) using `client-side routing`?
 
-> Answer:
+> Answer: Client side routing ahs a longer initial load time and then very light load time for any additional changes. It also enables you to reuse DOM elements and enhance the user experience with loading graphics and other minor things that add up. 
 
 ## Project Set Up
 
